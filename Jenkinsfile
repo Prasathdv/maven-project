@@ -23,6 +23,7 @@ pipeline{
         timeout(time:5, unit:'DAYS'){
           input message: 'APPROVE the PROD Release to proceed'
         }
+        build job: 'Deploy_to_PROD'
       }
       post{
         success{
