@@ -17,6 +17,21 @@ pipeline{
       steps{
         build job: 'Deploy_to_Staging'
       }
+    }
+    stage('Deploy to Prod'){
+      steps{
+        timeout(time:5, unit:'DAYS'){
+          input message: 'APPROVE the PROD Release to proceed'
+        }
+      }
+      post{
+        success{
+          echo 'Deployed to PROD successfully'
+        }
+        failure{
+          echo 'Deployed to PROD failed. Redo your deployment again!'
+        }
+      }
     }  
   }    
 }
